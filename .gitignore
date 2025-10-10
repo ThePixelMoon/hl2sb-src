@@ -511,3 +511,8 @@ FodyWeavers.xsd
 !src/lib/public/x64
 !src/lib/common/x64
 !src/thirdparty/protobuf-2.6.1/bin
+!src/thirdparty/protobuf-2.6.1/bin/win64
+!src/thirdparty/protobuf-2.6.1/bin/win64/2015
+!src/thirdparty/protobuf-2.6.1/bin/win64/2015/staticcrt
+!src/thirdparty/protobuf-2.6.1/bin/win64/2015/staticcrt/debug
+!src/thirdparty/protobuf-2.6.1/bin/win64/2015/staticcrt/release
