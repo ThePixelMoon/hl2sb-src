@@ -510,3 +510,4 @@ FodyWeavers.xsd
 !src/devtools/bin
 !src/lib/public/x64
 !src/lib/common/x64
+!src/thirdparty/protobuf-2.6.1/bin
