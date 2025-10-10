@@ -8,7 +8,9 @@ Half-Life 2: Sandbox is a [FOSS](https://en.wikipedia.org/wiki/Free_and_open-sou
 
 **Adnan's Rotational Gravity Gun**  
 Adnan Zafar
-`adnan.f.zafar@gmail.com` 
+
+`adnan.f.zafar@gmail.com`
+
 https://web.archive.org/web/20150222194420/http://skew.telefragged.com/mods/hl2/ARGG/
 
 ARGG is used by Half-Life 2: Sandbox to implement rotational functionality for the physics manipulator.
