@@ -60,6 +60,7 @@ $Project "server"
 
 $Project "launcher_main"
 {
+	"launcher_main\launcher_main_hl2sb.vpc" [$HL2SB]
 	"launcher_main\launcher_main_mod_hl2mp.vpc" [$HL2MP]
 	"launcher_main\launcher_main_mod_tf.vpc" [$TF]
 }
