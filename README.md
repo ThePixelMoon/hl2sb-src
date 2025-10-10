@@ -6,7 +6,8 @@ Half-Life 2: Sandbox is a [FOSS](https://en.wikipedia.org/wiki/Free_and_open-sou
 
 [![ARGG](http://media.moddb.com/images/downloads/1/6/5011/profile.jpg "ARGG")](https://web.archive.org/web/20150222194420/http://skew.telefragged.com/mods/hl2/ARGG/)
 
-**Adnan's Rotational Gravity Gun**  
+**Adnan's Rotational Gravity Gun**
+
 Adnan Zafar
 
 `adnan.f.zafar@gmail.com`
