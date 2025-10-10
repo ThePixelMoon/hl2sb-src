@@ -7,11 +7,11 @@ Half-Life 2: Sandbox is a [FOSS](https://en.wikipedia.org/wiki/Free_and_open-sou
 [![ARGG](http://media.moddb.com/images/downloads/1/6/5011/profile.jpg "ARGG")](https://web.archive.org/web/20150222194420/http://skew.telefragged.com/mods/hl2/ARGG/)
 
 **Adnan's Rotational Gravity Gun**  
-Adnan Zafar  
-adnan.f.zafar AT gmail DOT com  
-https://web.archive.org/web/20150222194420/http://skew.telefragged.com/mods/hl2/ARGG//  
+Adnan Zafar
+`adnan.f.zafar@gmail.com` 
+https://web.archive.org/web/20150222194420/http://skew.telefragged.com/mods/hl2/ARGG/
 
 ARGG is used by Half-Life 2: Sandbox to implement rotational functionality for the physics manipulator.
 
-**Open Steamworks**  
+**Open Steamworks**
 Open Steamworks is used in Half-Life 2: Sandbox for mounting additional game content through Steam's abstraction layer rather than the game engine's filesystem class, which prevents non-fatal engine errors.
