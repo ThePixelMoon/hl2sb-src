@@ -509,3 +509,4 @@ FodyWeavers.xsd
 !game/bin/x64/steam_api64.dll
 !src/devtools/bin
 !src/lib/public/x64
+!src/lib/common/x64
