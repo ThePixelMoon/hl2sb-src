@@ -90,6 +90,9 @@
 #include "serverbenchmark_base.h"
 #include "querycache.h"
 #include "player_voice_listener.h"
+#ifdef LUA_SDK
+#include "lua/luamgr.h"
+#endif
 
 #ifdef TF_DLL
 #include "gc_clientsystem.h"
@@ -709,6 +712,10 @@ bool CServerGameDLL::DLLInit( CreateInterfaceFn appSystemFactory,
 	// load Mod specific game events ( MUST be before InitAllSystems() so it can pickup the mod specific events)
 	gameeventmanager->LoadEventsFromFile("resource/ModEvents.res");
 
+#ifdef LUA_SDK
+	g_pLuaManager = new LuaManager();
+#endif
+
 #ifdef CSTRIKE_DLL // BOTPORT: TODO: move these ifdefs out
 	InstallBotControl();
 #endif
@@ -1077,6 +1084,10 @@ bool CServerGameDLL::LevelInit( const char *pMapName, char const *pMapEntities, 
 	// This makes sure those ents get cleaned up.
 	gEntList.CleanupDeleteList();
 
+#ifdef LUA_SDK
+	g_pLuaManager->Initialize();
+#endif
+
 	g_AIFriendliesTalkSemaphore.Release();
 	g_AIFoesTalkSemaphore.Release();
 	g_OneWayTransition = false;
@@ -1409,6 +1420,10 @@ void CServerGameDLL::LevelShutdown( void )
 
 	// In case we quit out during initial load
 	CBaseEntity::SetAllowPrecache( false );
+
+#ifdef LUA_SDK
+	g_pLuaManager->Shutdown();
+#endif
 
 	// Josh: Uncache all the particle systems on level shutdown
 	// otherwise we leak them constantly on changelevel in the

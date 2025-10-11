@@ -150,6 +150,9 @@
 
 #endif
 
+#ifdef LUA_SDK
+#include "lua/luamgr.h"
+#endif
 
 extern vgui::IInputInternal *g_InputInternal;
 
@@ -1058,6 +1061,12 @@ int CHLClient::Init( CreateInterfaceFn appSystemFactory, CreateInterfaceFn physi
 
 	g_pClientMode->Enable();
 
+#ifdef LUA_SDK
+	g_pLuaManager = new LuaManager();
+	
+	g_pLuaManager->Initialize();
+#endif
+
 	if ( !view )
 	{
 		view = ( IViewRender * )&g_DefaultViewRender;
@@ -1234,6 +1243,10 @@ void CHLClient::Shutdown( void )
 
 	IGameSystem::ShutdownAllSystems();
 	
+#ifdef LUA_SDK
+	g_pLuaManager->Shutdown();
+#endif
+
 	gHUD.Shutdown();
 	VGui_Shutdown();
 	

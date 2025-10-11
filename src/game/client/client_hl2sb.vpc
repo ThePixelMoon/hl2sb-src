@@ -13,7 +13,7 @@ $Configuration
 {
 	$Compiler
 	{
-		$AdditionalIncludeDirectories		"$BASE;hl2mp\ui,.\hl2mp,$SRCDIR\game\shared\hl2mp,.\hl2,.\hl2\elements,$SRCDIR\game\shared\hl2;$SRCDIR\game\shared\hl2sb;.\hl2sb,$SRCDIR\game\shared\Multiplayer"
+		$AdditionalIncludeDirectories		"$BASE;hl2mp\ui,.\hl2mp,$SRCDIR\game\shared\hl2mp,.\hl2,.\hl2\elements,$SRCDIR\game\shared\hl2;$SRCDIR\game\shared\hl2sb;.\hl2sb,$SRCDIR\game\shared\Multiplayer,$SRCDIR\luajit\src"
 		$PreprocessorDefinitions			"$BASE;HL2MP;HL2_CLIENT_DLL;NEXT_BOT;HL2SB;ARGG;LUA_SDK"
 	}
 }
@@ -44,6 +44,12 @@ $Project "Client (HL2SB)"
 			$File	"$SRCDIR\game\shared\hl2mp\hl2mp_playeranimstate.cpp"
 			$File	"$SRCDIR\game\shared\Multiplayer\multiplayer_animstate.h"
 			$File	"$SRCDIR\game\shared\Multiplayer\multiplayer_animstate.cpp"
+		}
+
+		$Folder "Lua Implementation"
+		{
+			$File	"$SRCDIR\game\shared\lua\luamgr.cpp"
+			$File	"$SRCDIR\game\shared\lua\luamgr.h"
 		}
 
 		$Folder	"NextBot"
@@ -187,5 +193,10 @@ $Project "Client (HL2SB)"
 				$File	"hl2mp\hud_deathnotice.cpp"
 			}
 		}
+	}
+
+	$Folder	"Link Libraries" 
+	{
+		$Lib	luajit
 	}
 }

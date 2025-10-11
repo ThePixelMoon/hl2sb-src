@@ -1,0 +1,144 @@
+//-----------------------------------------------------------------------------
+// LUAJIT.VPC
+//-----------------------------------------------------------------------------
+
+$macro SRCDIR      ".."
+
+$include "$SRCDIR\vpc_scripts\source_lib_base.vpc"
+
+$Configuration
+{
+    $Compiler
+    {
+        $PreprocessorDefinitions    "$BASE;LUAJIT_ABIVER=5.1;LUAJIT_MAJVER=2;MAKEFILE_FORCE_C_COMPILE"
+		$PreprocessorDefinitions 	"$BASE;LUAJIT_OS=LUAJIT_OS_WINDOWS;WIN" [$WINDOWS]
+		$PreprocessorDefinitions    "$BASE;LUAJIT_OS=LUAJIT_OS_LINUX" [$POSIX]
+		$CompileAs						"Compile as C Code (/TC)"
+
+		$AdditionalIncludeDirectories	"$BASE;.\src;.\dynasm"
+    }
+
+	$Librarian [$WINDOWS]
+    {
+        $AdditionalDependencies    "Rpcrt4.lib"
+    }
+}
+
+$Project "luajit"
+{
+    $Folder "Source Files"
+    {
+        $File    "src/lj_assert.c"
+        $File    "src/lj_gc.c"
+        $File    "src/lj_err.c"
+        $File    "src/lj_char.c"
+        $File    "src/lj_bc.c"
+        $File    "src/lj_obj.c"
+        $File    "src/lj_buf.c"
+        $File    "src/lj_str.c"
+        $File    "src/lj_tab.c"
+        $File    "src/lj_func.c"
+        $File    "src/lj_udata.c"
+        $File    "src/lj_meta.c"
+        $File    "src/lj_debug.c"
+        $File    "src/lj_prng.c"
+        $File    "src/lj_state.c"
+        $File    "src/lj_dispatch.c"
+        $File    "src/lj_vmevent.c"
+        $File    "src/lj_vmmath.c"
+        $File    "src/lj_strscan.c"
+        $File    "src/lj_strfmt.c"
+        $File    "src/lj_strfmt_num.c"
+        $File    "src/lj_serialize.c"
+        $File    "src/lj_api.c"
+        $File    "src/lj_profile.c"
+        $File    "src/lj_lex.c"
+        $File    "src/lj_parse.c"
+        $File    "src/lj_bcread.c"
+        $File    "src/lj_bcwrite.c"
+        $File    "src/lj_load.c"
+        $File    "src/lj_ir.c"
+        $File    "src/lj_opt_mem.c"
+        $File    "src/lj_opt_fold.c"
+        $File    "src/lj_opt_narrow.c"
+        $File    "src/lj_opt_dce.c"
+        $File    "src/lj_opt_loop.c"
+        $File    "src/lj_opt_split.c"
+        $File    "src/lj_opt_sink.c"
+        $File    "src/lj_mcode.c"
+        $File    "src/lj_snap.c"
+        $File    "src/lj_record.c"
+        $File    "src/lj_crecord.c"
+        $File    "src/lj_ffrecord.c"
+        $File    "src/lj_asm.c"
+        $File    "src/lj_trace.c"
+        $File    "src/lj_gdbjit.c"
+
+        $File    "src/lj_ctype.c"
+        $File    "src/lj_cdata.c"
+        $File    "src/lj_cconv.c"
+        $File    "src/lj_ccall.c"
+        $File    "src/lj_ccallback.c"
+        $File    "src/lj_carith.c"
+        $File    "src/lj_clib.c"
+        $File    "src/lj_cparse.c"
+
+        $File    "src/lj_lib.c"
+        $File    "src/lj_alloc.c"
+        $File    "src/lib_aux.c"
+
+        $File    "src/lib_base.c"
+        $File    "src/lib_math.c"
+        $File    "src/lib_bit.c"
+        $File    "src/lib_string.c"
+        $File    "src/lib_table.c"
+        $File    "src/lib_io.c"
+        $File    "src/lib_os.c"
+        $File    "src/lib_package.c"
+        $File    "src/lib_debug.c"
+        $File    "src/lib_jit.c"
+        $File    "src/lib_ffi.c"
+        $File    "src/lib_buffer.c"
+
+        $File    "src/lj_vm.S"
+        $File    "src/vm_x86.dasc"
+
+        $File    "src/luajit.c"
+
+        $DynamicFile    "src/luajit.h"
+        $DynamicFile    "src/host/buildvm_arch.h"
+        $DynamicFile    "src/lj_bcdef.h"
+        $DynamicFile    "src/lj_ffdef.h"
+        $DynamicFile    "src/lj_libdef.h"
+        $DynamicFile    "src/lj_recdef.h"
+        $DynamicFile    "src/lj_folddef.h"
+
+    }
+
+    $Folder "Host Tools"
+    {
+        $File    "src/host/minilua.c"
+        $File    "src/host/buildvm.c"
+    }
+
+    $Folder "Header Files"
+    {
+        $File    "src/lua.h"
+        $File    "src/luaconf.h"
+        $File    "src/luajit.h"
+        $File    "src/lj_arch.h"
+        $File    "src/lj_vm.h"
+        $File    "src/lj_obj.h"
+        $File    "src/lj_funcs.h"
+        $File    "src/lj_str.h"
+        $File    "src/lj_lib.h"
+        $File    "src/lj_frame.h"
+        $File    "src/lj_asm.h"
+
+        $DynamicFile    "src/lj_bcdef.h"
+        $DynamicFile    "src/lj_ffdef.h"
+        $DynamicFile    "src/lj_libdef.h"
+        $DynamicFile    "src/lj_recdef.h"
+        $DynamicFile    "src/lj_folddef.h"
+    }
+}

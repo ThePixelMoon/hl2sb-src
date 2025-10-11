@@ -541,3 +541,4 @@ stats.txt
 videoconfig_*.cfg
 steam_appid.txt
 voice_ban.dt
+*.o
