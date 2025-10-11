@@ -1,0 +1,84 @@
+//-----------------------------------------------------------------------------
+// LUA.VPC
+//-----------------------------------------------------------------------------
+
+$macro SRCDIR      ".."
+
+$include "$SRCDIR\vpc_scripts\source_lib_base.vpc"
+
+$Configuration
+{
+    $Compiler
+    {
+        $PreprocessorDefinitions    "$BASE;MAKEFILE_FORCE_C_COMPILE"
+        $PreprocessorDefinitions    "$BASE;LUA_USE_LINUX" [$POSIX]
+        $AdditionalIncludeDirectories	"$BASE;.\src"
+		$CompileAs						"Compile as C Code (/TC)"
+    }
+}
+
+
+$Project "lua"
+{
+    $Folder "Source Files"
+    {
+        $File    "src/lapi.c"
+        $File    "src/lcode.c"
+        $File    "src/ldebug.c"
+        $File    "src/ldo.c"
+        $File    "src/ldump.c"
+        $File    "src/lfunc.c"
+        $File    "src/lgc.c"
+        $File    "src/llex.c"
+        $File    "src/lmem.c"
+        $File    "src/lobject.c"
+        $File    "src/lopcodes.c"
+        $File    "src/lparser.c"
+        $File    "src/lstate.c"
+        $File    "src/lstring.c"
+        $File    "src/ltable.c"
+        $File    "src/ltm.c"
+        $File    "src/lundump.c"
+        $File    "src/lvm.c"
+        $File    "src/lzio.c"
+        
+        $File    "src/lauxlib.c"
+        
+        $File    "src/lbaselib.c"
+        $File    "src/ldblib.c"
+        $File    "src/liolib.c"
+        $File    "src/lmathlib.c"
+        $File    "src/loslib.c"
+        $File    "src/ltablib.c"
+        $File    "src/lstrlib.c"
+        $File    "src/loadlib.c"
+        $File    "src/linit.c"
+    }
+
+    $Folder "Header Files"
+    {
+        $File    "src/lua.h"
+        $File    "src/luaconf.h"
+        $File    "src/lualib.h"
+        $File    "src/lauxlib.h"
+        $File    "src/lapi.h"
+        $File    "src/lcode.h"
+        $File    "src/ldebug.h"
+        $File    "src/ldo.h"
+        $File    "src/lfunc.h"
+        $File    "src/lgc.h"
+        $File    "src/llex.h"
+        $File    "src/llimits.h"
+        $File    "src/lmem.h"
+        $File    "src/lobject.h"
+        $File    "src/lopcodes.h"
+        $File    "src/lparser.h"
+        $File    "src/lstate.h"
+        $File    "src/lstring.h"
+        $File    "src/ltable.h"
+        $File    "src/ltm.h"
+        $File    "src/lundump.h"
+        $File    "src/lvm.h"
+        $File    "src/lzio.h"
+    }
+}

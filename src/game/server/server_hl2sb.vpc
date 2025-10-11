@@ -14,7 +14,7 @@ $Configuration
 {
 	$Compiler
 	{
-		$AdditionalIncludeDirectories	"$BASE;$SRCDIR\game\shared\hl2,.\hl2,.\hl2mp,$SRCDIR\game\shared\hl2mp;$SRCDIR\game\shared\hl2sb;.\hl2sb,$SRCDIR\game\shared\Multiplayer,$SRCDIR\luajit\src"
+		$AdditionalIncludeDirectories	"$BASE;$SRCDIR\game\shared\hl2,.\hl2,.\hl2mp,$SRCDIR\game\shared\hl2mp;$SRCDIR\game\shared\hl2sb;.\hl2sb,$SRCDIR\game\shared\Multiplayer,$SRCDIR\lua\src,$SRCDIR\lua\etc"
 		$PreprocessorDefinitions		"$BASE;HL2MP;HL2_DLL;NEXT_BOT;HL2SB;ARGG;LUA_SDK"
 	}
 }
@@ -77,6 +77,9 @@ $Project "Server (HL2SB)"
 
 		$Folder "Lua Implementation"
 		{
+			$File	"$SRCDIR\game\shared\lua\linit.cpp"
+			$File	"$SRCDIR\game\shared\lua\linit.h"
+			$File	"$SRCDIR\game\shared\lua\lbase.cpp"
 			$File	"$SRCDIR\game\shared\lua\luamgr.cpp"
 			$File	"$SRCDIR\game\shared\lua\luamgr.h"
 		}
@@ -381,6 +384,6 @@ $Project "Server (HL2SB)"
 
 	$Folder	"Link Libraries" 
 	{
-		$Lib	luajit
+		$Lib	lua
 	}
 }

@@ -12,7 +12,7 @@ $Group "gamedlls"
 {
 	"client"
 	"server"
-	"luajit"
+	"lua"
 }
 
 $Group "game"
@@ -25,7 +25,7 @@ $Group "game"
 	"server"
 	"tier1"
 	"vgui_controls"
-	"luajit"
+	"lua"
 }
 
 $Group "shaders"
@@ -61,7 +61,7 @@ $Group "everything"
 	"vtfdiff"
 	"vvis_dll"
 	"vvis_launcher"
-	"luajit"
+	"lua"
 
 	"game_shader_generic_example"
 

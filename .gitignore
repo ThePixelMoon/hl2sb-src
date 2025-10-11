@@ -542,3 +542,4 @@ videoconfig_*.cfg
 steam_appid.txt
 voice_ban.dt
 *.o
+!src/luajit/src/lj_vm.S

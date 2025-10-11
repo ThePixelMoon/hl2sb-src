@@ -22,6 +22,13 @@ public:
 
 	bool Initialize();
 	void Shutdown();
+
+	bool doString( const char* m_szString );
+
+	lua_State *GetState() const { return m_pL; }
+
+private:
+	lua_State* m_pL;
 };
 
 extern LuaManager *g_pLuaManager;

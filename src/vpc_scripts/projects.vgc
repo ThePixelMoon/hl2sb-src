@@ -58,9 +58,9 @@ $Project "server"
 	"game\server\server_hl2sb.vpc"		[$HL2SB]
 }
 
-$Project "luajit"
+$Project "lua"
 {
-	"luajit\luajit.vpc"
+	"lua\lua.vpc"
 }
 
 $Project "launcher_main"
