@@ -41,7 +41,9 @@ public:
 	#ifdef GAME_DLL
 		DECLARE_DATADESC();
 	
+#ifdef HL2SB
 		void SendReloadSoundEvent( void );
+#endif // HL2SB
 
 		void Materialize( void );
 		virtual	int	ObjectCaps( void );
@@ -60,6 +62,9 @@ public:
 
 	virtual void FireBullets( const FireBulletsInfo_t &info );
 	virtual void FallInit( void );
+#ifdef HL2SB
+	virtual bool Reload();
+#endif // HL2SB
 	
 public:
 	#if defined( CLIENT_DLL )

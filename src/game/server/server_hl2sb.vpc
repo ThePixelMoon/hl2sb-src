@@ -14,7 +14,7 @@ $Configuration
 {
 	$Compiler
 	{
-		$AdditionalIncludeDirectories	"$BASE;$SRCDIR\game\shared\hl2,.\hl2,.\hl2mp,$SRCDIR\game\shared\hl2mp;$SRCDIR\game\shared\hl2sb;.\hl2sb"
+		$AdditionalIncludeDirectories	"$BASE;$SRCDIR\game\shared\hl2,.\hl2,.\hl2mp,$SRCDIR\game\shared\hl2mp;$SRCDIR\game\shared\hl2sb;.\hl2sb,$SRCDIR\game\shared\Multiplayer"
 		$PreprocessorDefinitions		"$BASE;HL2MP;HL2_DLL;NEXT_BOT;HL2SB;ARGG;LUA_SDK"
 	}
 }
@@ -69,6 +69,10 @@ $Project "Server (HL2SB)"
 			$File   "$SRCDIR\game\shared\hl2sb\hl2sb_gamerules.cpp"
 			$File   "$SRCDIR\game\shared\hl2sb\hl2sb_gamerules.h"
 			$FIle	"hl2sb\hl2sb_client.cpp"
+			$File	"$SRCDIR\game\shared\hl2mp\hl2mp_playeranimstate.h"
+			$File	"$SRCDIR\game\shared\hl2mp\hl2mp_playeranimstate.cpp"
+			$File	"$SRCDIR\game\shared\Multiplayer\multiplayer_animstate.h"
+			$File	"$SRCDIR\game\shared\Multiplayer\multiplayer_animstate.cpp"
 		}
 
 		$Folder "NextBot"

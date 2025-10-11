@@ -61,7 +61,7 @@ public:
 
 	const WeaponProficiencyInfo_t *GetProficiencyValues();
 
-#ifndef CLIENT_DLL
+#if !defined( CLIENT_DLL ) || defined( HL2SB )
 	DECLARE_ACTTABLE();
 #endif
 
@@ -85,9 +85,24 @@ END_PREDICTION_DATA()
 LINK_ENTITY_TO_CLASS( weapon_smg1, CWeaponSMG1 );
 PRECACHE_WEAPON_REGISTER(weapon_smg1);
 
-#ifndef CLIENT_DLL
+#if !defined( CLIENT_DLL ) || defined( HL2SB )
 acttable_t	CWeaponSMG1::m_acttable[] = 
 {
+#ifdef HL2SB
+	{ ACT_MP_STAND_IDLE,				ACT_HL2MP_IDLE_SMG1,					false },
+	{ ACT_MP_CROUCH_IDLE,				ACT_HL2MP_IDLE_CROUCH_SMG1,				false },
+
+	{ ACT_MP_RUN,						ACT_HL2MP_RUN_SMG1,						false },
+	{ ACT_MP_CROUCHWALK,				ACT_HL2MP_WALK_CROUCH_SMG1,				false },
+
+	{ ACT_MP_ATTACK_STAND_PRIMARYFIRE,	ACT_HL2MP_GESTURE_RANGE_ATTACK_SMG1,	false },
+	{ ACT_MP_ATTACK_CROUCH_PRIMARYFIRE,	ACT_HL2MP_GESTURE_RANGE_ATTACK_SMG1,	false },
+
+	{ ACT_MP_RELOAD_STAND,				ACT_HL2MP_GESTURE_RELOAD_SMG1,			false },
+	{ ACT_MP_RELOAD_CROUCH,				ACT_HL2MP_GESTURE_RELOAD_SMG1,			false },
+
+	{ ACT_MP_JUMP,						ACT_HL2MP_JUMP_SMG1,					false },
+#else
 	{ ACT_HL2MP_IDLE,					ACT_HL2MP_IDLE_SMG1,					false },
 	{ ACT_HL2MP_RUN,					ACT_HL2MP_RUN_SMG1,						false },
 	{ ACT_HL2MP_IDLE_CROUCH,			ACT_HL2MP_IDLE_CROUCH_SMG1,				false },
@@ -96,6 +111,7 @@ acttable_t	CWeaponSMG1::m_acttable[] =
 	{ ACT_HL2MP_GESTURE_RELOAD,			ACT_HL2MP_GESTURE_RELOAD_SMG1,			false },
 	{ ACT_HL2MP_JUMP,					ACT_HL2MP_JUMP_SMG1,					false },
 	{ ACT_RANGE_ATTACK1,				ACT_RANGE_ATTACK_SMG1,					false },
+#endif // HL2SB
 };
 
 IMPLEMENT_ACTTABLE(CWeaponSMG1);
@@ -164,6 +180,9 @@ bool CWeaponSMG1::Reload( void )
 		m_flNextSecondaryAttack = GetOwner()->m_flNextAttack = fCacheTime;
 
 		WeaponSound( RELOAD );
+#ifdef HL2SB
+		ToHL2MPPlayer(GetOwner())->DoAnimationEvent( PLAYERANIMEVENT_RELOAD );
+#endif // HL2SB
 	}
 
 	return fRet;
@@ -193,7 +212,11 @@ void CWeaponSMG1::AddViewKick( void )
 void CWeaponSMG1::SecondaryAttack( void )
 {
 	// Only the player fires this way so we can cast
+#ifdef HL2SB
+	CHL2MP_Player *pPlayer = ToHL2MPPlayer( GetOwner() );
+#else
 	CBasePlayer *pPlayer = ToBasePlayer( GetOwner() );
+#endif // HL2SB
 	
 	if ( pPlayer == NULL )
 		return;
@@ -234,7 +257,11 @@ void CWeaponSMG1::SecondaryAttack( void )
 	SendWeaponAnim( ACT_VM_SECONDARYATTACK );
 
 	// player "shoot" animation
+#ifdef HL2SB
+	pPlayer->DoAnimationEvent( PLAYERANIMEVENT_ATTACK_PRIMARY );
+#else
 	pPlayer->SetAnimation( PLAYER_ATTACK1 );
+#endif // HL2SB
 
 	// Decrease ammo
 	pPlayer->RemoveAmmo( 1, m_iSecondaryAmmoType );

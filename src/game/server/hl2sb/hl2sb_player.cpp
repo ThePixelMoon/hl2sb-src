@@ -19,26 +19,29 @@ LINK_ENTITY_TO_CLASS( info_player_rebel, CPointEntity );
 // specific to the local player
 BEGIN_SEND_TABLE_NOBASE( CHL2SB_Player, DT_HL2SB_LocalPlayerExclusive )
 	// send a hi-res origin to the local player for use in prediction
-	SendPropVectorXY(SENDINFO(m_vecOrigin),               -1, SPROP_NOSCALE|SPROP_CHANGES_OFTEN, 0.0f, HIGH_DEFAULT, SendProxy_OriginXY ),
-	SendPropFloat   (SENDINFO_VECTORELEM(m_vecOrigin, 2), -1, SPROP_NOSCALE|SPROP_CHANGES_OFTEN, 0.0f, HIGH_DEFAULT, SendProxy_OriginZ ),
-
+	SendPropVector	(SENDINFO(m_vecOrigin), -1,  SPROP_NOSCALE|SPROP_CHANGES_OFTEN, 0.0f, HIGH_DEFAULT, SendProxy_Origin ),
 	SendPropFloat( SENDINFO_VECTORELEM(m_angEyeAngles, 0), 8, SPROP_CHANGES_OFTEN, -90.0f, 90.0f ),
-	SendPropAngle( SENDINFO_VECTORELEM(m_angEyeAngles, 1), 10, SPROP_CHANGES_OFTEN ),
-
+//	SendPropAngle( SENDINFO_VECTORELEM(m_angEyeAngles, 1), 10, SPROP_CHANGES_OFTEN ),
 END_SEND_TABLE()
 
 // all players except the local player
 BEGIN_SEND_TABLE_NOBASE( CHL2SB_Player, DT_HL2SB_NonLocalPlayerExclusive )
 	// send a lo-res origin to other players
-	SendPropVectorXY(SENDINFO(m_vecOrigin),               -1, SPROP_COORD_MP_LOWPRECISION|SPROP_CHANGES_OFTEN, 0.0f, HIGH_DEFAULT, SendProxy_OriginXY ),
-	SendPropFloat   (SENDINFO_VECTORELEM(m_vecOrigin, 2), -1, SPROP_COORD_MP_LOWPRECISION|SPROP_CHANGES_OFTEN, 0.0f, HIGH_DEFAULT, SendProxy_OriginZ ),
-
+	SendPropVector	(SENDINFO(m_vecOrigin), -1,  SPROP_COORD_MP_LOWPRECISION|SPROP_CHANGES_OFTEN, 0.0f, HIGH_DEFAULT, SendProxy_Origin ),
 	SendPropFloat( SENDINFO_VECTORELEM(m_angEyeAngles, 0), 8, SPROP_CHANGES_OFTEN, -90.0f, 90.0f ),
 	SendPropAngle( SENDINFO_VECTORELEM(m_angEyeAngles, 1), 10, SPROP_CHANGES_OFTEN ),
-
+	// Only need to latch cycle for other players
+	// If you increase the number of bits networked, make sure to also modify the code below and in the client class.
+	SendPropInt( SENDINFO( m_cycleLatch ), 4, SPROP_UNSIGNED ),
 END_SEND_TABLE()
 
 IMPLEMENT_SERVERCLASS_ST(CHL2SB_Player, DT_HL2SB_Player)
+	SendPropExclude( "DT_BaseAnimating", "m_flPoseParameter" ),
+	SendPropExclude( "DT_BaseAnimating", "m_flPlaybackRate" ),	
+	SendPropExclude( "DT_BaseAnimating", "m_nSequence" ),
+	SendPropExclude( "DT_BaseEntity", "m_angRotation" ),
+	SendPropExclude( "DT_BaseAnimatingOverlay", "overlay_vars" ),
+
 	SendPropExclude( "DT_BaseEntity", "m_vecOrigin" ),
 
 	// misyl:
@@ -50,22 +53,22 @@ IMPLEMENT_SERVERCLASS_ST(CHL2SB_Player, DT_HL2SB_Player)
 	// So, just never send it, and don't predict it on the client either.
 	SendPropExclude( "DT_BasePlayer", "m_flMaxspeed" ),
 
+	// playeranimstate and clientside animation takes care of these on the client
+	SendPropExclude( "DT_ServerAnimationData" , "m_flCycle" ),	
+	SendPropExclude( "DT_AnimTimeMustBeFirst" , "m_flAnimTime" ),
 
-	// Data that only gets sent to the local player
-	SendPropDataTable( "hl2sblocaldata", 0, &REFERENCE_SEND_TABLE( DT_HL2SB_LocalPlayerExclusive ), SendProxy_SendLocalDataTable ),
+	SendPropExclude( "DT_BaseFlex", "m_flexWeight" ),
+	SendPropExclude( "DT_BaseFlex", "m_blinktoggle" ),
+	SendPropExclude( "DT_BaseFlex", "m_viewtarget" ),
 
+	// Data that only gets sent to the local player.
+	SendPropDataTable( "hl2sblocaldata", 0, &REFERENCE_SEND_TABLE(DT_HL2SB_LocalPlayerExclusive), SendProxy_SendLocalDataTable ),
 	// Data that gets sent to all other players
-	SendPropDataTable( "hl2sbnonlocaldata", 0, &REFERENCE_SEND_TABLE( DT_HL2SB_NonLocalPlayerExclusive ), SendProxy_SendNonLocalDataTable ),
+	SendPropDataTable( "hl2sbnonlocaldata", 0, &REFERENCE_SEND_TABLE(DT_HL2SB_NonLocalPlayerExclusive), SendProxy_SendNonLocalDataTable ),
 
 	SendPropEHandle( SENDINFO( m_hRagdoll ) ),
 	SendPropInt( SENDINFO( m_iSpawnInterpCounter), 4 ),
 	SendPropInt( SENDINFO( m_iPlayerSoundType), 3 ),
-	
-	SendPropExclude( "DT_BaseAnimating", "m_flPoseParameter" ),
-	SendPropExclude( "DT_BaseFlex", "m_viewtarget" ),
-
-//	SendPropExclude( "DT_ServerAnimationData" , "m_flCycle" ),	
-//	SendPropExclude( "DT_AnimTimeMustBeFirst" , "m_flAnimTime" ),	
 END_SEND_TABLE()
 
 BEGIN_DATADESC( CHL2SB_Player )

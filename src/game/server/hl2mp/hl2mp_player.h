@@ -16,6 +16,9 @@ class CHL2MP_Player;
 #include "hl2_player.h"
 #include "simtimer.h"
 #include "soundenvelope.h"
+#ifdef HL2SB
+#include "hl2mp_playeranimstate.h"
+#endif // HL2SB
 #include "hl2mp_player_shared.h"
 #include "hl2mp_gamerules.h"
 #include "utldict.h"
@@ -52,13 +55,22 @@ public:
 	DECLARE_SERVERCLASS();
 	DECLARE_DATADESC();
 	DECLARE_ENT_SCRIPTDESC();
+#ifdef HL2SB
+	DECLARE_PREDICTABLE();
+
+	// This passes the event to the client's and server's CHL2MPPlayerAnimState.
+	void			DoAnimationEvent( PlayerAnimEvent_t event, int nData = 0 );
+	void			SetupBones( matrix3x4_t *pBoneToWorld, int boneMask );
+#endif // HL2SB
 
 	virtual void Precache( void );
 	virtual void Spawn( void );
 	virtual void PostThink( void );
 	virtual void PreThink( void );
 	virtual void PlayerDeathThink( void );
+#ifndef HL2SB
 	virtual void SetAnimation( PLAYER_ANIM playerAnim );
+#endif // !HL2SB
 	virtual bool HandleCommand_JoinTeam( int team );
 	virtual bool ClientCommand( const CCommand &args );
 	virtual void CreateViewModel( int viewmodelindex = 0 );
@@ -84,9 +96,14 @@ public:
 	void	PrecacheFootStepSounds( void );
 	bool	ValidatePlayerModel( const char *pModel );
 
+#ifndef HL2SB
 	QAngle GetAnimEyeAngles( void ) { return m_angEyeAngles.Get(); }
+#endif // !HL2SB
 
 	Vector GetAttackSpread( CBaseCombatWeapon *pWeapon, CBaseEntity *pTarget = NULL );
+#ifdef HL2SB
+	virtual Vector GetAutoaimVector( float flDelta );
+#endif // HL2SB
 
 	void CheatImpulseCommands( int iImpulse );
 	void CreateRagdollEntity( void );
@@ -95,7 +112,12 @@ public:
 
 	void NoteWeaponFired( void );
 
+#ifdef HL2SB
+	void SetAnimation( PLAYER_ANIM playerAnim );
+#else
 	void ResetAnimation( void );
+#endif // HL2SB
+
 	void SetPlayerModel( void );
 	void SetPlayerTeamModel( void );
 	Activity TranslateTeamActivity( Activity ActToTranslate );
@@ -146,7 +168,13 @@ public:
 private:
 
 	CNetworkQAngle( m_angEyeAngles );
+#ifndef HL2SB
 	CPlayerAnimState   m_PlayerAnimState;
+#endif // !HL2SB
+
+#ifdef HL2SB
+	CHL2MPPlayerAnimState *m_PlayerAnimState;
+#endif // HL2SB
 
 	int m_iLastWeaponFireUsercmd;
 	int m_iModelType;
@@ -168,6 +196,11 @@ private:
 
     bool m_bEnterObserver;
 	bool m_bReady;
+
+#ifdef HL2SB
+	CNetworkVar( int, m_cycleLatch ); // Network the cycle to clients periodically
+	CountdownTimer m_cycleLatchTimer;
+#endif // HL2SB
 };
 
 inline CHL2MP_Player *ToHL2MPPlayer( CBaseEntity *pEntity )
