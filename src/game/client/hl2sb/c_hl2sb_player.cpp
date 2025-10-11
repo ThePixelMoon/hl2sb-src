@@ -14,7 +14,7 @@
 LINK_ENTITY_TO_CLASS( player, C_HL2SB_Player );
 
 // specific to the local player
-BEGIN_RECV_TABLE_NOBASE( C_HL2SB_Player, DT_HL2SBLocalPlayerExclusive )
+BEGIN_RECV_TABLE_NOBASE( C_HL2SB_Player, DT_HL2SB_LocalPlayerExclusive )
 	RecvPropVectorXY( RECVINFO_NAME( m_vecNetworkOrigin, m_vecOrigin ) ),
 	RecvPropFloat( RECVINFO_NAME( m_vecNetworkOrigin[2], m_vecOrigin[2] ) ),
 
@@ -23,7 +23,7 @@ BEGIN_RECV_TABLE_NOBASE( C_HL2SB_Player, DT_HL2SBLocalPlayerExclusive )
 END_RECV_TABLE()
 
 // all players except the local player
-BEGIN_RECV_TABLE_NOBASE( C_HL2SB_Player, DT_HL2SBNonLocalPlayerExclusive )
+BEGIN_RECV_TABLE_NOBASE( C_HL2SB_Player, DT_HL2SB_NonLocalPlayerExclusive )
 	RecvPropVectorXY( RECVINFO_NAME( m_vecNetworkOrigin, m_vecOrigin ) ),
 	RecvPropFloat( RECVINFO_NAME( m_vecNetworkOrigin[2], m_vecOrigin[2] ) ),
 
@@ -32,8 +32,8 @@ BEGIN_RECV_TABLE_NOBASE( C_HL2SB_Player, DT_HL2SBNonLocalPlayerExclusive )
 END_RECV_TABLE()
 
 IMPLEMENT_CLIENTCLASS_DT(C_HL2SB_Player, DT_HL2SB_Player, CHL2SB_Player)
-	RecvPropDataTable( "hl2sblocaldata", 0, 0, &REFERENCE_RECV_TABLE( DT_HL2SBLocalPlayerExclusive ) ),
-	RecvPropDataTable( "hl2sbnonlocaldata", 0, 0, &REFERENCE_RECV_TABLE( DT_HL2SBNonLocalPlayerExclusive ) ),
+	RecvPropDataTable( "hl2sblocaldata", 0, 0, &REFERENCE_RECV_TABLE( DT_HL2SB_LocalPlayerExclusive ) ),
+	RecvPropDataTable( "hl2sbnonlocaldata", 0, 0, &REFERENCE_RECV_TABLE( DT_HL2SB_NonLocalPlayerExclusive ) ),
 
 	RecvPropEHandle( RECVINFO( m_hRagdoll ) ),
 	RecvPropInt( RECVINFO( m_iSpawnInterpCounter ) ),

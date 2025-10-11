@@ -531,3 +531,13 @@ tier1.a
 tier1.lib
 vgui_controls.a
 vgui_controls.lib
+
+ServerConfig.vdf
+server_blacklist.txt
+settings.scr
+*shaders.cfg
+graphs/
+stats.txt
+videoconfig_*.cfg
+steam_appid.txt
+voice_ban.dt
