@@ -23,4 +23,12 @@ public:
 	DECLARE_INTERPOLATION();
 };
 
+inline C_HL2SB_Player *ToHL2SBPlayer( CBaseEntity *pEntity )
+{
+	if ( !pEntity || !pEntity->IsPlayer() )
+		return NULL;
+
+	return dynamic_cast<C_HL2SB_Player*>( pEntity );
+}
+
 #endif // C_HL2Sb_PLAYER_H

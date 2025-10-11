@@ -38,6 +38,8 @@ $Project "Client (HL2SB)"
 		{
 			$File	"hl2sb\c_hl2sb_player.cpp"
 			$File	"hl2sb\c_hl2sb_player.h"
+			$File   "$SRCDIR\game\shared\hl2sb\hl2sb_gamerules.cpp"
+			$File   "$SRCDIR\game\shared\hl2sb\hl2sb_gamerules.h"
 		}
 
 		$Folder	"NextBot"
