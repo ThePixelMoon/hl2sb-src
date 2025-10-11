@@ -520,3 +520,14 @@ FodyWeavers.xsd
 compile_commands.json
 .ninja_deps
 .ninja_log
+
+mathlib.a
+mathlib.lib
+matsys_controls.a
+matsys_controls.lib
+raytrace.a
+raytrace.lib
+tier1.a
+tier1.lib
+vgui_controls.a
+vgui_controls.lib
