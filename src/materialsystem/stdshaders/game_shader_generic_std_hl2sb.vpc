@@ -12,6 +12,6 @@ $Macro OUTBINDIR	"$SRCDIR\..\game\$GAMENAME\bin"
 
 $Include "$SRCDIR\materialsystem\stdshaders\stdshader_dx9_inc.vpc"
 
-$Project "Standard Shader Replacements (HL2:SB)"
+$Project "Standard Shader Replacements (HL2SB)"
 {
 }

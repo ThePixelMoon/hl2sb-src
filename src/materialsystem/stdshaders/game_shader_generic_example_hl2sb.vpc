@@ -9,6 +9,6 @@ $Macro OUTBINNAME "game_shader_generic_example"
 $Macro GAMENAME "hl2sb"
 $Include "$SRCDIR\materialsystem\stdshaders\game_shader_generic_example_base.vpc"
 
-$Project "Game Shaders (HL2:SB)"
+$Project "Game Shaders (HL2SB)"
 {
 }

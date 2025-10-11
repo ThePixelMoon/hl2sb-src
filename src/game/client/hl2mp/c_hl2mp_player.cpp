@@ -26,7 +26,10 @@
 
 ConVar sv_infinite_aux_power( "sv_infinite_aux_power", "0", FCVAR_CHEAT | FCVAR_REPLICATED );
 
+// @ThePixelMoon: we handle this in the C_HL2SB_Player class
+#ifndef HL2SB
 LINK_ENTITY_TO_CLASS( player, C_HL2MP_Player );
+#endif
 
 // specific to the local player
 BEGIN_RECV_TABLE_NOBASE( C_HL2MP_Player, DT_HL2MPLocalPlayerExclusive )

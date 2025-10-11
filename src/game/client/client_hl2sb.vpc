@@ -13,12 +13,12 @@ $Configuration
 {
 	$Compiler
 	{
-		$AdditionalIncludeDirectories		"$BASE;hl2mp\ui,.\hl2mp,$SRCDIR\game\shared\hl2mp,.\hl2,.\hl2\elements,$SRCDIR\game\shared\hl2,$SRCDIR\game\shared\hl2sb,.\hl2sb"
+		$AdditionalIncludeDirectories		"$BASE;hl2mp\ui,.\hl2mp,$SRCDIR\game\shared\hl2mp,.\hl2,.\hl2\elements,$SRCDIR\game\shared\hl2;$SRCDIR\game\shared\hl2sb;.\hl2sb"
 		$PreprocessorDefinitions			"$BASE;HL2MP;HL2_CLIENT_DLL;NEXT_BOT;HL2SB;ARGG;LUA_SDK"
 	}
 }
 
-$Project "Client (HL2:SB)"
+$Project "Client (HL2SB)"
 {
 	$Folder	"Source Files"
 	{
@@ -33,6 +33,12 @@ $Project "Client (HL2:SB)"
 		$File	"$SRCDIR\game\shared\predicted_viewmodel.h"
 		$File	"$SRCDIR\game\shared\teamplay_round_timer.cpp"
 		$File	"$SRCDIR\game\shared\teamplay_round_timer.h"
+
+		$Folder "Half-Life 2: Sandbox"
+		{
+			$File	"hl2sb\c_hl2sb_player.cpp"
+			$File	"hl2sb\c_hl2sb_player.h"
+		}
 
 		$Folder	"NextBot"
 		{

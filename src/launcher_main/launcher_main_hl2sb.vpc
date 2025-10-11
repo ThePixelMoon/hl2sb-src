@@ -12,7 +12,7 @@ $Configuration
 	}
 }
 
-$Project "Launcher Main (HL2:SB)"
+$Project "Launcher Main (HL2SB)"
 {
     $Folder "Resource Files" [$WINDOWS]
     {
