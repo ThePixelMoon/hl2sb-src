@@ -518,3 +518,5 @@ FodyWeavers.xsd
 !src/thirdparty/protobuf-2.6.1/bin/win64/2015/staticcrt/release
 .vscode/
 compile_commands.json
+.ninja_deps
+.ninja_log
